@@ -6,7 +6,7 @@ const Home = () => {
   
   return (
     <div className={styles.container}>
-
+        <p>Page Home</p>
     </div> 
   )
 }

@@ -1,26 +1,21 @@
-// Importation des fichiers
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from 'pages/Home'
 import Movie from 'pages/Movie'
+import Error404 from 'pages/Error404'
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route exact path="/home">
-          <Home />
-        </Route>
+      <Routes>
+        <Route exact path="/home" element={<Home/>} />
 
-        <Route exact path="/movie">
-          <Movie />
-        </Route>
+        <Route exact path="/movie" element={<Movie/>} />
 
-        <Route exact path="/">
-          <Home />
-        </Route>
+        <Route exact path="/" element={<Home/>} />
 
-      </Switch>
+        <Route path="*" element={<Error404/>} />
+      </Routes>
     </BrowserRouter>
   )
 }
