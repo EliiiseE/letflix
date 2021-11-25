@@ -3,6 +3,9 @@ import React from 'react'
 import styles from './Home.module.sass'
 import MovieList from 'components/MovieList'
 import Layout from 'components/Layout'
+import Navbar from "components/Navbar";
+import TextIcon from "components/TextIcon";
+
 
 const Home = () => {
   
@@ -11,6 +14,9 @@ const Home = () => {
         <Layout />  
         <p>Page Home</p>
         <MovieList />
+        <Navbar />
+        <TextIcon />
+        
     </div> 
   )
 }
