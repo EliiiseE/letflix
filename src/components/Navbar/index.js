@@ -5,8 +5,12 @@ import styles from './Navbar.module.sass'
 const Navbar = () => {
   
   return (
-    <div className={styles.container}>
-
+    <div>
+      <ul className="nav">
+        <li> salut</li>
+        <li> </li>
+        <li> </li>
+      </ul>
     </div> 
   )
 }
