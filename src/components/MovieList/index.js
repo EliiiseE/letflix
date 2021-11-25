@@ -4,11 +4,8 @@ import styles from './MovieList.module.sass'
 
 const MovieList = (props) => {
   
-  const movies = [{ image: 'images/bright.png', description: 'yo' },
-                  { image: 'images/bright.png', description: 'yop' },
-                  { image: 'images/bright.png', description: 'yo' },
-                  { image: 'images/bright.png', description: 'yop' }]
 
+  const {movies} = props
   // const fonction = () => (
   //   1
   // )
