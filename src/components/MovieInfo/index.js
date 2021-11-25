@@ -2,6 +2,7 @@
 import React from 'react'
 import styles from './MovieInfo.module.sass'
 import MovieList from 'components/MovieList'
+import Navbar from 'components/Navbar'
 import { Icon } from '@iconify/react'
 
 const MovieInfo = (props) => {
@@ -28,6 +29,7 @@ const MovieInfo = (props) => {
             <p>Em um mundo futurista, seres humanos convivem em harmônia com seres fantásticos, como fadas e ogros. Mesmo nesse cenário infrações da lei acontecem e um policial humano (Will Smith) especializado em crimes mágicos é obrigado a trabalhar junto com um orc (Joel Edgerton) para evitar que uma poderosa arma caia nas mãos erradas.</p> 
         </div>
         <MovieList movies={movies} title="Films en lien" />
+        <Navbar />
     </div> 
   )
 }
