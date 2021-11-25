@@ -2,6 +2,7 @@
 import React from 'react'
 import styles from './Error404.module.sass'
 
+
 const Error404 = () => {
   
   return (
