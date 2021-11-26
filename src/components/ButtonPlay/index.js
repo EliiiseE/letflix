@@ -4,22 +4,15 @@ import { Icon } from '@iconify/react';
 
 
 
-function buttonPlay() {
+function buttonPlay(props) {
+    const { large } = props
     return (
-        <div >
-<button className={styles.buttonPlay}>
-
-
-<Icon icon="ci:play-arrow" className={styles.icononbutton}/>
-   <span className={styles.txtbutton}> Play </span> 
-
-    {/* <Icon icon="codicon:triangle-down" /> */}
-    
-   
-</button>
-            
+        <div>
+            <button className={`${styles.buttonPlay} ${large ? styles.buttonPlayLarge : ''}`}>
+                <Icon icon="ci:play-arrow" className={styles.iconOnButton} />
+                <span className={styles.txtButton}> Play </span>
+            </button>
         </div>
-        
     )
 }
 
