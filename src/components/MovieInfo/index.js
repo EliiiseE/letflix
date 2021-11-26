@@ -3,6 +3,7 @@ import React from 'react'
 import styles from './MovieInfo.module.sass'
 import MovieList from 'components/MovieList'
 import Navbar from 'components/Navbar'
+import { Link } from 'react-router-dom'
 import { Icon } from '@iconify/react'
 
 const MovieInfo = (props) => {
@@ -14,7 +15,7 @@ const MovieInfo = (props) => {
   return (
    
     <div className={styles.container}>
-        <Icon icon="akar-icons:chevron-left" />
+        <Link to={props.iconLink}> <Icon icon="akar-icons:chevron-left"/> </Link>
         <div className={styles.information_top}>
             <img src={props.image} className={styles.image}/>
             <div className={styles.information_top_text}>
