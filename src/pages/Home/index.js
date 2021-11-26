@@ -20,10 +20,10 @@ function category() {
 
 const Home = () => {
 
-  const movies = [{ image: 'images/bright.png', description: 'yo' },
-  { image: 'images/bright.png', description: 'yop' },
-  { image: 'images/bright.png', description: 'yo' },
-  { image: 'images/bright.png', description: 'yop' }]
+  const movies = [{ image: 'images/bright.png', link: '/movie' },
+                  { image: 'images/bright.png', link: '/movie' },
+                  { image: 'images/bright.png', link: '/movie' },
+                  { image: 'images/bright.png', link: '/movie' }]
   return (
     <div className={styles.container}>
       <div className={styles.logoandCateg}>

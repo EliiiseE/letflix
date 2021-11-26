@@ -1,24 +1,21 @@
 
 import React from 'react'
 import styles from './MovieList.module.sass'
+import { Link } from 'react-router-dom'
 
 const MovieList = (props) => {
-
-
-  const { movies } = props
-  // const fonction = () => (
-  //   1
-  // )
+  
+  const {movies} = props
 
   return (
     <div className={styles.container}>
-      <h3>{props.title}</h3>
-      <div className={styles.movieList__image}>
-        {movies.map((movie) => (
-          <img src={movie.image} className={styles.image} />
-        ))}
-      </div>
-    </div>
+        <h3>{props.title}</h3>
+        <div className={styles.movieList__image}>
+          {movies.map((movie) => (
+            <Link to={movie.link} > <img src={movie.image} className={styles.image}/> </Link>
+          ))}
+        </div>
+    </div> 
   )
 }
 
