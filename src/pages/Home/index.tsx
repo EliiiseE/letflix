@@ -37,15 +37,13 @@ const Home = (): ReactElement => {
 
         <ul className={styles.threeElement}>
           <li className={styles.ContaintNav}>
-            {' '}
-            <TextIcon titleName="Ajouter" icon="icon-park-outline:like" />{' '}
+            <TextIcon titleName="Ajouter" icon="icon-park-outline:like" />
           </li>
           <li>
             <ButtonPlay />
           </li>
           <li className={styles.ContaintNav}>
-            {' '}
-            <TextIcon titleName="Informations" icon="akar-icons:info" />{' '}
+            <TextIcon titleName="Informations" icon="akar-icons:info" />
           </li>
         </ul>
 

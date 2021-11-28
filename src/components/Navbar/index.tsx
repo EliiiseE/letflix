@@ -7,16 +7,13 @@ const Navbar = (): ReactElement => {
     <div>
       <ul className={styles.Navbar}>
         <li className={styles.ContaintNav}>
-          {' '}
-          <TextIcon titleName="Accueil" icon="ant-design:home-filled" />{' '}
+          <TextIcon titleName="Accueil" icon="ant-design:home-filled" />
         </li>
         <li className={styles.ContaintNav}>
-          {' '}
-          <TextIcon titleName="Ma liste" icon="icon-park-outline:like" />{' '}
+          <TextIcon titleName="Ma liste" icon="icon-park-outline:like" />
         </li>
         <li className={styles.ContaintNav}>
-          {' '}
-          <TextIcon titleName="Rechercher" icon="akar-icons:search" />{' '}
+          <TextIcon titleName="Rechercher" icon="akar-icons:search" />
         </li>
       </ul>
     </div>

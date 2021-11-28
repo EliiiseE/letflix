@@ -22,8 +22,7 @@ const MovieList = (props: PropsType): ReactElement => {
         {movies.map((movie, index) => (
           <div key={index}>
             <Link to={movie.link}>
-              {' '}
-              <img src={movie.image} className={styles.image} />{' '}
+              <img src={movie.image} className={styles.image} />
             </Link>
           </div>
         ))}
