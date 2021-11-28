@@ -1,9 +1,6 @@
 @import 'styles/variables'
 
-.Navbar
-  display: flex
-  list-style: none
-  justify-content: space-between
+.container
   position: fixed
   bottom: 0
   left: 0
@@ -11,5 +8,19 @@
   background-color: $primary
   padding: 10px 0 5px 0
 
-  .ContaintNav
-    margin: 0px 5%
+  .menu
+    display: flex
+    list-style: none
+    justify-content: space-between
+
+    .link
+      margin: 0px 5%
+
+  hr
+    margin: 5px
+    border-color: $primary-300
+
+  .thanks
+    text-align: center
+    font-size: 0.8rem
+    color: $primary-200

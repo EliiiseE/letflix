@@ -4,20 +4,37 @@ import Layout from 'components/Layout';
 import Navbar from 'components/Navbar';
 import ButtonPlay from 'components/ButtonPlay';
 import TextIcon from 'components/TextIcon';
-import { ReactElement, useEffect } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { getTopRatedMovies, getAllGenres } from 'api/tmdb';
+
+type MovieType = {
+  image: string;
+  link: string;
+};
 
 const Home = (): ReactElement => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const movies = [
-    { image: 'images/bright.png', link: '/movie' },
-    { image: 'images/bright.png', link: '/movie' },
-    { image: 'images/bright.png', link: '/movie' },
-    { image: 'images/bright.png', link: '/movie' },
-  ];
+  const [topRatedMovies, setTopRatedMovies] = useState<Array<MovieType>>([]);
+
+  // useEffect with [] to use it only once at the beginning
+  useEffect(() => {
+    getAllGenres();
+    getTopRatedMovies().then((response) => {
+      response.results.map((movie: MovieTMDB) => {
+        setTopRatedMovies((movies) =>
+          movies.concat({
+            image: movie.poster_path,
+            link: `/movie/${movie.id}`,
+          }),
+        );
+      });
+    });
+  }, []);
+
   return (
     <Layout>
       <Helmet>
@@ -48,8 +65,8 @@ const Home = (): ReactElement => {
         </ul>
 
         {/* <p>Page Home</p> */}
-        <MovieList movies={movies} title="Films" />
-        <MovieList movies={movies} title="Séries" />
+        <MovieList movies={topRatedMovies} title="Films" />
+        <MovieList movies={topRatedMovies} title="Séries" />
         <Navbar />
       </div>
     </Layout>

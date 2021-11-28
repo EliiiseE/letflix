@@ -20,11 +20,12 @@ const MovieList = (props: PropsType): ReactElement => {
       <h3>{title}</h3>
       <div className={styles.movieList__image}>
         {movies.map((movie, index) => (
-          <div key={index}>
-            <Link to={movie.link}>
-              <img src={movie.image} className={styles.image} />
-            </Link>
-          </div>
+          <Link to={movie.link} key={index} className={styles.link}>
+            <img
+              src={`https://image.tmdb.org/t/p/original${movie.image}`}
+              className={styles.image}
+            />
+          </Link>
         ))}
       </div>
     </div>
