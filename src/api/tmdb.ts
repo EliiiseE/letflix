@@ -17,8 +17,25 @@ export const getAllGenres = async (): Promise<any> => {
 
   const response = await fetch(url);
   const responseJson = await response.json();
-
   console.log(responseJson);
+
+  return responseJson;
+};
+
+export const getComedieMovies = async (): Promise<any> => {
+  const url = `${API_URL}/discover/movie?api_key=${API_KEY}&language=fr-FR&with_genres=35`;
+
+  const response = await fetch(url);
+  const responseJson = await response.json();
+
+  return responseJson;
+};
+
+export const getActionMovies = async (): Promise<any> => {
+  const url = `${API_URL}/discover/movie?api_key=${API_KEY}&language=fr-FR&with_genres=28`;
+
+  const response = await fetch(url);
+  const responseJson = await response.json();
 
   return responseJson;
 };

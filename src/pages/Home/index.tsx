@@ -6,7 +6,7 @@ import ButtonPlay from 'components/ButtonPlay';
 import TextIcon from 'components/TextIcon';
 import { ReactElement, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { getTopRatedMovies, getAllGenres } from 'api/tmdb';
+import { getTopRatedMovies, getComedieMovies, getActionMovies, getAllGenres } from 'api/tmdb';
 
 type MovieType = {
   image: string;
@@ -19,6 +19,8 @@ const Home = (): ReactElement => {
   }, []);
 
   const [topRatedMovies, setTopRatedMovies] = useState<Array<MovieType>>([]);
+  const [comedieMovies, setComedieMovies] = useState<Array<MovieType>>([]);
+  const [actionMovies, setActionMovies] = useState<Array<MovieType>>([]);
 
   // useEffect with [] to use it only once at the beginning
   useEffect(() => {
@@ -26,6 +28,28 @@ const Home = (): ReactElement => {
     getTopRatedMovies().then((response) => {
       response.results.map((movie: MovieTMDB) => {
         setTopRatedMovies((movies) =>
+          movies.concat({
+            image: movie.poster_path,
+            link: `/movie/${movie.id}`,
+          }),
+        );
+      });
+    });
+
+    getComedieMovies().then((response) => {
+      response.results.map((movie: MovieTMDB) => {
+        setComedieMovies((movies) =>
+          movies.concat({
+            image: movie.poster_path,
+            link: `/movie/${movie.id}`,
+          }),
+        );
+      });
+    });
+
+    getActionMovies().then((response) => {
+      response.results.map((movie: MovieTMDB) => {
+        setActionMovies((movies) =>
           movies.concat({
             image: movie.poster_path,
             link: `/movie/${movie.id}`,
@@ -65,8 +89,9 @@ const Home = (): ReactElement => {
         </ul>
 
         {/* <p>Page Home</p> */}
-        <MovieList movies={topRatedMovies} title="Films" />
-        <MovieList movies={topRatedMovies} title="Séries" />
+        <MovieList movies={topRatedMovies} title="Les mieux notés" />
+        <MovieList movies={comedieMovies} title="Comédie" />
+        <MovieList movies={actionMovies} title="Action" />
         <Navbar />
       </div>
     </Layout>
