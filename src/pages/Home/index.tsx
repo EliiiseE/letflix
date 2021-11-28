@@ -6,7 +6,7 @@ import ButtonPlay from 'components/ButtonPlay';
 import TextIcon from 'components/TextIcon';
 import { ReactElement, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { getTopRatedMovies, getComedieMovies, getActionMovies, getAllGenres } from 'api/tmdb';
+import { getTopRatedMovies, getMoviesFromGenre, getAllGenres } from 'api/tmdb';
 
 type MovieType = {
   image: string;
@@ -36,7 +36,7 @@ const Home = (): ReactElement => {
       });
     });
 
-    getComedieMovies().then((response) => {
+    getMoviesFromGenre(35).then((response) => {
       response.results.map((movie: MovieTMDB) => {
         setComedieMovies((movies) =>
           movies.concat({
@@ -47,7 +47,7 @@ const Home = (): ReactElement => {
       });
     });
 
-    getActionMovies().then((response) => {
+    getMoviesFromGenre(28).then((response) => {
       response.results.map((movie: MovieTMDB) => {
         setActionMovies((movies) =>
           movies.concat({

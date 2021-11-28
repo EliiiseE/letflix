@@ -33,17 +33,8 @@ export const getAllGenres = async (): Promise<AllGenresType> => {
   return responseJson;
 };
 
-export const getComedieMovies = async (): Promise<AllMoviesType> => {
-  const url = `${API_URL}/discover/movie?api_key=${API_KEY}&language=fr-FR&with_genres=35`;
-
-  const response = await fetch(url);
-  const responseJson = await response.json();
-
-  return responseJson;
-};
-
-export const getActionMovies = async (): Promise<AllMoviesType> => {
-  const url = `${API_URL}/discover/movie?api_key=${API_KEY}&language=fr-FR&with_genres=28`;
+export const getMoviesFromGenre = async (id: number): Promise<AllMoviesType> => {
+  const url = `${API_URL}/discover/movie?api_key=${API_KEY}&language=fr-FR&with_genres=${id}`;
 
   const response = await fetch(url);
   const responseJson = await response.json();
