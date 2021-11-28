@@ -4,21 +4,52 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.1",
+    "@iconify/react": "^3.1.0",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "craco-alias": "^3.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-helmet-async": "^1.1.2",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "sass": "^1.43.4",
     "web-vitals": "^1.1.2"
   },
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "@types/node": "^12.20.37",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb": "^19.0.1",
+    "eslint-config-airbnb-typescript": "^16.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^25.3.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
+    "prettier": "^2.5.0",
+    "typescript": "^4.5.2"
+  },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
+    "lint:fix": "eslint . --ext .ts,.js,.tsx,.jsx --fix",
+    "prettify": "prettier --write **/*.{ts,tsx,js,jsx,json}",
+    "lint-staged": "lint-staged",
+    "lint+prettify": "npm run lint:fix && npm run prettify"
   },
   "eslintConfig": {
     "extends": [
@@ -38,7 +69,19 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "@iconify/react": "^3.1.0"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "npm run lint:fix",
+      "git add --force"
+    ],
+    "*.{ts,tsx,js,jsx,json}": [
+      "npm run prettify",
+      "git add --force"
+    ]
   }
 }
