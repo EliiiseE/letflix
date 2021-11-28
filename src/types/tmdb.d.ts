@@ -13,3 +13,8 @@ type MovieTMDB = {
   vote_average: number;
   vote_count: number;
 };
+
+type GenresTMDB = {
+  id: number;
+  name: string;
+};
