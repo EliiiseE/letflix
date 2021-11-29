@@ -4,7 +4,7 @@ const API_URL = 'https://api.themoviedb.org/3';
 
 type AllMoviesType = {
   page: number;
-  results: [MovieTMDB];
+  results: [MovieItemsTMDB];
   total_pages: number;
   total_results: number;
 };
@@ -28,13 +28,22 @@ export const getAllGenres = async (): Promise<AllGenresType> => {
   const response = await fetch(url);
   const responseJson = await response.json();
 
-  console.log(responseJson);
+  // console.log(responseJson);
 
   return responseJson;
 };
 
 export const getMoviesFromGenre = async (id: number): Promise<AllMoviesType> => {
   const url = `${API_URL}/discover/movie?api_key=${API_KEY}&language=fr-FR&with_genres=${id}`;
+
+  const response = await fetch(url);
+  const responseJson = await response.json();
+
+  return responseJson;
+};
+
+export const getMovie = async (id?: string): Promise<MovieTMDB> => {
+  const url = `${API_URL}/movie/${id}?api_key=${API_KEY}&language=fr-FR`;
 
   const response = await fetch(url);
   const responseJson = await response.json();

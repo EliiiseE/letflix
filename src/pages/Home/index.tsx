@@ -10,7 +10,7 @@ import { getTopRatedMovies, getMoviesFromGenre, getAllGenres } from 'api/tmdb';
 
 type MovieType = {
   image: string;
-  link: string;
+  id: number;
 };
 
 const Home = (): ReactElement => {
@@ -26,33 +26,33 @@ const Home = (): ReactElement => {
   useEffect(() => {
     getAllGenres();
     getTopRatedMovies().then((response) => {
-      response.results.map((movie: MovieTMDB) => {
+      response.results.map((movie) => {
         setTopRatedMovies((movies) =>
           movies.concat({
             image: movie.poster_path,
-            link: `/movie/${movie.id}`,
+            id: movie.id,
           }),
         );
       });
     });
 
     getMoviesFromGenre(35).then((response) => {
-      response.results.map((movie: MovieTMDB) => {
+      response.results.map((movie) => {
         setComedieMovies((movies) =>
           movies.concat({
             image: movie.poster_path,
-            link: `/movie/${movie.id}`,
+            id: movie.id,
           }),
         );
       });
     });
 
     getMoviesFromGenre(28).then((response) => {
-      response.results.map((movie: MovieTMDB) => {
+      response.results.map((movie) => {
         setActionMovies((movies) =>
           movies.concat({
             image: movie.poster_path,
-            link: `/movie/${movie.id}`,
+            id: movie.id,
           }),
         );
       });

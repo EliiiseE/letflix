@@ -9,7 +9,7 @@ type PropsType = {
 
 type MovieType = {
   image: string;
-  link: string;
+  id: number;
 };
 
 const MovieList = (props: PropsType): ReactElement => {
@@ -20,7 +20,7 @@ const MovieList = (props: PropsType): ReactElement => {
       <h3>{title}</h3>
       <div className={styles.movieList__image}>
         {movies.map((movie, index) => (
-          <Link to={movie.link} key={index} className={styles.link}>
+          <Link to={`/movie/${movie.id}`} key={index} className={styles.link}>
             <img
               src={`https://image.tmdb.org/t/p/original${movie.image}`}
               className={styles.image}
