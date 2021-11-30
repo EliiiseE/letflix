@@ -93,7 +93,7 @@ const Home = (): ReactElement => {
 
       <div className={styles.container}>
         <div className={styles.logoandCateg}>
-          <img src="logo192.png"></img>
+          <img src="letflixgrand.png"></img>
           <a style={{ marginLeft: 30 }}>Catégorie</a>
         </div>
         {popularMovie && (
