@@ -11,7 +11,7 @@ const Search = (): ReactElement => {
   return (
     <Layout>
       <Helmet>
-        <title>Search page</title>
+        <title>Netflix | Search</title>
         <meta name="description" content="Description" />
       </Helmet>
 

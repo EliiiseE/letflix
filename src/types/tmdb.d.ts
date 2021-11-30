@@ -1,7 +1,7 @@
 type MovieItemsTMDB = {
   adult: boolean;
   backdrop_path: string;
-  genre_ids: [number];
+  genre_ids: number[];
   id: number;
   original_language: string;
   original_title: string;
@@ -24,7 +24,7 @@ type MovieTMDB = {
   backdrop_path: string;
   belongs_to_collection: null;
   budget: number;
-  genres: [GenresTMDB];
+  genres: GenresTMDB[];
   homepage: string;
   id: number;
   imdb_id: string;
@@ -33,12 +33,12 @@ type MovieTMDB = {
   overview: string;
   popularity: number;
   poster_path: string;
-  production_companies: [ProductionCompanyTMDB];
-  production_countries: [ProductionCountryTMDB];
+  production_companies: ProductionCompanyTMDB[];
+  production_countries: ProductionCountryTMDB[];
   release_date: string;
   revenue: number;
   runtime: number;
-  spoken_languages: [SpokenLanguageTMDB];
+  spoken_languages: SpokenLanguageTMDB[];
   status: string;
   tagline: string;
   title: string;

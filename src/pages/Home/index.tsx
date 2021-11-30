@@ -6,11 +6,23 @@ import ButtonPlay from 'components/ButtonPlay';
 import TextIcon from 'components/TextIcon';
 import { ReactElement, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { getTopRatedMovies, getMoviesFromGenre, getAllGenres } from 'api/tmdb';
+import { getTopRatedMovies, getMoviesFromGenre, getAllGenres, getPopularMovies } from 'api/tmdb';
+import { Link } from 'react-router-dom';
 
 type MovieType = {
   image: string;
   id: number;
+};
+
+type PopularMovieType = {
+  image: string;
+  name: string;
+  id: number;
+};
+
+type GenreMovieType = {
+  title: string;
+  movies: MovieType[];
 };
 
 const Home = (): ReactElement => {
@@ -19,12 +31,11 @@ const Home = (): ReactElement => {
   }, []);
 
   const [topRatedMovies, setTopRatedMovies] = useState<Array<MovieType>>([]);
-  const [comedieMovies, setComedieMovies] = useState<Array<MovieType>>([]);
-  const [actionMovies, setActionMovies] = useState<Array<MovieType>>([]);
+  const [popularMovie, setPopularMovie] = useState<PopularMovieType>();
+  const [genreMovies, setGenreMovies] = useState<Array<GenreMovieType>>([]);
 
   // useEffect with [] to use it only once at the beginning
   useEffect(() => {
-    getAllGenres();
     getTopRatedMovies().then((response) => {
       response.results.map((movie) => {
         setTopRatedMovies((movies) =>
@@ -36,25 +47,46 @@ const Home = (): ReactElement => {
       });
     });
 
-    getMoviesFromGenre(35).then((response) => {
-      response.results.map((movie) => {
-        setComedieMovies((movies) =>
-          movies.concat({
-            image: movie.poster_path,
-            id: movie.id,
-          }),
-        );
+    getAllGenres().then((response) => {
+      const { genres } = response;
+
+      genres.map((genre) => {
+        const { id, name } = genre;
+        getMoviesFromGenre(id).then((res) => {
+          const finalMovies: MovieType[] = [];
+          res.results.map((movie) => {
+            finalMovies.push({
+              image: movie.poster_path,
+              id: movie.id,
+            });
+          });
+          setGenreMovies((movies) =>
+            movies.concat({
+              title: name,
+              movies: finalMovies,
+            }),
+          );
+        });
       });
     });
 
-    getMoviesFromGenre(28).then((response) => {
-      response.results.map((movie) => {
-        setActionMovies((movies) =>
-          movies.concat({
-            image: movie.poster_path,
-            id: movie.id,
-          }),
-        );
+    // getMoviesFromGenre(35).then((response) => {
+    //   response.results.map((movie) => {
+    //     setComedieMovies((movies) =>
+    //       movies.concat({
+    //         image: movie.poster_path,
+    //         id: movie.id,
+    //       }),
+    //     );
+    //   });
+    // });
+
+    getPopularMovies().then((response) => {
+      const movie = response.results[0];
+      setPopularMovie({
+        image: movie.backdrop_path,
+        name: movie.title,
+        id: movie.id,
       });
     });
   }, []);
@@ -62,36 +94,44 @@ const Home = (): ReactElement => {
   return (
     <Layout>
       <Helmet>
-        <title>Home page</title>
+        <title>Netflix</title>
         <meta name="description" content="Description" />
       </Helmet>
 
       <div className={styles.container}>
         <div className={styles.logoandCateg}>
-          <img src="images/Netflix.png"></img>
+          <img src="logo192.png"></img>
           <a style={{ marginLeft: 30 }}>Catégorie</a>
         </div>
-        <div>
-          <img src="images/witcher.jpg" className={styles.witcherImg}></img>
-          <p className={styles.txtWitcher}>The Witcher</p>
-        </div>
+        {popularMovie && (
+          <>
+            <div>
+              <img
+                src={`https://image.tmdb.org/t/p/original${popularMovie.image}`}
+                className={styles.witcherImg}
+              ></img>
+              <p className={styles.txtWitcher}>{popularMovie.name}</p>
+            </div>
+            <ul className={styles.threeElement}>
+              <li className={styles.ContaintNav}>
+                <TextIcon titleName="Ajouter" icon="icon-park-outline:like" />
+              </li>
+              <li>
+                <ButtonPlay />
+              </li>
+              <li className={styles.ContaintNav}>
+                <Link to={`/movie/${popularMovie.id}`}>
+                  <TextIcon titleName="Informations" icon="akar-icons:info" />
+                </Link>
+              </li>
+            </ul>
+          </>
+        )}
 
-        <ul className={styles.threeElement}>
-          <li className={styles.ContaintNav}>
-            <TextIcon titleName="Ajouter" icon="icon-park-outline:like" />
-          </li>
-          <li>
-            <ButtonPlay />
-          </li>
-          <li className={styles.ContaintNav}>
-            <TextIcon titleName="Informations" icon="akar-icons:info" />
-          </li>
-        </ul>
-
-        {/* <p>Page Home</p> */}
         <MovieList movies={topRatedMovies} title="Les mieux notés" />
-        <MovieList movies={comedieMovies} title="Comédie" />
-        <MovieList movies={actionMovies} title="Action" />
+        {genreMovies.map((genre, index) => (
+          <MovieList movies={genre.movies} title={genre.title} key={index} />
+        ))}
         <Navbar />
       </div>
     </Layout>

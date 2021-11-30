@@ -28,8 +28,6 @@ export const getAllGenres = async (): Promise<AllGenresType> => {
   const response = await fetch(url);
   const responseJson = await response.json();
 
-  // console.log(responseJson);
-
   return responseJson;
 };
 
@@ -44,6 +42,24 @@ export const getMoviesFromGenre = async (id: number): Promise<AllMoviesType> => 
 
 export const getMovie = async (id?: string): Promise<MovieTMDB> => {
   const url = `${API_URL}/movie/${id}?api_key=${API_KEY}&language=fr-FR`;
+
+  const response = await fetch(url);
+  const responseJson = await response.json();
+
+  return responseJson;
+};
+
+export const getSimilarMovies = async (id?: string): Promise<AllMoviesType> => {
+  const url = `${API_URL}/movie/${id}/similar?api_key=${API_KEY}&language=fr-FR`;
+
+  const response = await fetch(url);
+  const responseJson = await response.json();
+
+  return responseJson;
+};
+
+export const getPopularMovies = async (): Promise<AllMoviesType> => {
+  const url = `${API_URL}/movie/popular?api_key=${API_KEY}&language=fr-FR`;
 
   const response = await fetch(url);
   const responseJson = await response.json();

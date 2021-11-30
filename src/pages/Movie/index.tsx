@@ -1,10 +1,10 @@
 import styles from './Movie.module.sass';
 import MovieInfo from 'components/MovieInfo';
-// import MovieList from 'components/MovieList';
+import MovieList from 'components/MovieList';
 import Layout from 'components/Layout';
 import { ReactElement, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { getMovie } from 'api/tmdb';
+import { getMovie, getSimilarMovies } from 'api/tmdb';
 import { useParams, useNavigate } from 'react-router-dom';
 
 type MovieType = {
@@ -15,6 +15,11 @@ type MovieType = {
   description: string;
 };
 
+type SimilarMovieType = {
+  image: string;
+  id: number;
+};
+
 const Movie = (): ReactElement => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -23,6 +28,7 @@ const Movie = (): ReactElement => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [movie, setMovie] = useState<MovieType>();
+  const [similarMovies, setSimilarMovies] = useState<Array<SimilarMovieType>>([]);
 
   useEffect(() => {
     getMovie(id).then((response) => {
@@ -39,13 +45,26 @@ const Movie = (): ReactElement => {
         description: response.overview,
       });
     });
+
+    // Return to empty array every time because react doesn't reload fully the page
+    setSimilarMovies([]);
+    getSimilarMovies(id).then((response) => {
+      response.results.map((similarMovie) => {
+        setSimilarMovies((movies) =>
+          movies.concat({
+            image: similarMovie.poster_path,
+            id: similarMovie.id,
+          }),
+        );
+      });
+    });
   }, [id, navigate]);
 
   return (
     <Layout>
       <Helmet>
-        <title>Movie page</title>
-        <meta name="description" content="Description" />
+        <title>{`Netflix | ${movie?.name}`}</title>
+        <meta name="description" content={movie?.description} />
       </Helmet>
 
       <div className={styles.container}>
@@ -59,7 +78,7 @@ const Movie = (): ReactElement => {
           />
         )}
 
-        {/* <MovieList movies={movies} title="Films en lien" /> */}
+        <MovieList movies={similarMovies} title="Films en lien" />
       </div>
     </Layout>
   );
