@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import styles from './Search.module.sass';
 
 const Search = (): ReactElement => {
+  // Always return to the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

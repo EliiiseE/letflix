@@ -4,13 +4,13 @@ const API_URL = 'https://api.themoviedb.org/3';
 
 type AllMoviesType = {
   page: number;
-  results: [MovieItemsTMDB];
+  results: MovieItemsTMDB[];
   total_pages: number;
   total_results: number;
 };
 
 type AllGenresType = {
-  genres: [GenresTMDB];
+  genres: GenresTMDB[];
 };
 
 // Function for getting top rated movies
