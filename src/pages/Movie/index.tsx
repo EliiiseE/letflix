@@ -66,7 +66,7 @@ const Movie = (): ReactElement => {
     <Layout>
       <Helmet>
         {/* Allows to dynamically add the right movie title */}
-        <title>{`Netflix | ${movie?.name}`}</title>
+        <title>{`Letflix | ${movie?.name}`}</title>
         <meta name="description" content={movie?.description} />
       </Helmet>
 

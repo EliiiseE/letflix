@@ -4,13 +4,16 @@ import Home from 'pages/Home';
 import Movie from 'pages/Movie';
 import Favorite from 'pages/Favorite';
 import Error404 from 'pages/Error404';
-import Search from 'components/Search';
+import Search from 'pages/Search';
+import Log from 'pages/Log';
 
 const Router = (): ReactElement => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+
+        <Route path="/log" element={<Log />} />
 
         <Route path="/movie/:id" element={<Movie />} />
 

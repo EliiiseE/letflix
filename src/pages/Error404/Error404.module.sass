@@ -2,17 +2,24 @@
 
 .container
   h5
-    margin-top: 5rem
+    padding-top: 2rem
     font-family: $error-font
     color: $accent
     font-size: 6rem
     text-align: center
 
-  .txt
-    margin: 6rem 2.8rem
+  .text__container
+    position: fixed
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
     display: flex
     flex-direction: column
     align-items: center
+    width: 100%
+    max-width: 50rem
+    padding: 0 3.2rem
+
     .question
       text-align: center
       font-family: $font
@@ -21,16 +28,18 @@
       color: $secondary
       margin: 10px
 
-    p
+    .text
       margin-top: 10px
       text-align: left
       font-family: $font
       font-size: 1.8rem
 
     .button
-      margin: 2rem
+      margin: 3rem
       align-self: center
       background-color: $secondary
-      padding: 10px 15px
+      padding: 1rem 1.5rem
       color: $primary
       font-size: $font-size-paragraphe
+      border-radius: 8px
+      font-size: 1.8rem

@@ -26,10 +26,10 @@ const Navbar = (): ReactElement => {
       </ul>
       <hr />
       <p className={styles.thanks}>
-        Thanks
+        Thanks{' '}
         <a href="https://www.themoviedb.org" target="_blank">
           TMDB
-        </a>
+        </a>{' '}
         for the API contribution
       </p>
     </div>
