@@ -12,7 +12,7 @@ const Search = (): ReactElement => {
   return (
     <Layout>
       <Helmet>
-        <title>Netflix | Search</title>
+        <title>Letflix | Search</title>
         <meta name="description" content="Description" />
       </Helmet>
 

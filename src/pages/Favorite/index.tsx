@@ -13,7 +13,7 @@ const Favorite = (): ReactElement => {
   return (
     <Layout>
       <Helmet>
-        <title>Netflix - Favorite</title>
+        <title>Letflix - Favorite</title>
         <meta name="description" content="Description" />
       </Helmet>
 

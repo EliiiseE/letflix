@@ -13,7 +13,7 @@ const Error404 = (): ReactElement => {
   return (
     <Layout>
       <Helmet>
-        <title>Netflix - Error404</title>
+        <title>Letflix - Error404</title>
         <meta name="description" content="Description" />
       </Helmet>
 
