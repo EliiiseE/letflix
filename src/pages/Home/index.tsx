@@ -102,9 +102,9 @@ const Home = (): ReactElement => {
               {/* Url required for getting the img */}
               <img
                 src={`https://image.tmdb.org/t/p/original${popularMovie.image}`}
-                className={styles.witcherImg}
+                className={styles.movieImg}
               ></img>
-              <p className={styles.txtWitcher}>{popularMovie.name}</p>
+              <p className={styles.movieTxt}>{popularMovie.name}</p>
             </div>
             <ul className={styles.threeElement}>
               <li className={styles.ContaintNav}>
