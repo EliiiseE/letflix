@@ -13,13 +13,17 @@ const Navbar = (): ReactElement => {
           </Link>
         </li>
         <li className={styles.link}>
-          <Link to={`/`}>
+          <Link to={`/mylist`}>
             <TextIcon titleName="Ma liste" icon="icon-park-outline:like" />
           </Link>
         </li>
 
         <li className={styles.link}>
+<<<<<<< HEAD
           <Link to={`search`}>
+=======
+          <Link to={`/Search`}>
+>>>>>>> db6ec608fecac0a8de90a3aed34cf516a21445e1
             <TextIcon titleName="Rechercher" icon="akar-icons:search" />
           </Link>
         </li>

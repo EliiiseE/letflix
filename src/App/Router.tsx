@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from 'pages/Home';
 import Movie from 'pages/Movie';
+import Favorite from 'pages/Favorite';
 import Error404 from 'pages/Error404';
 import Search from 'pages/Search';
 
@@ -14,6 +15,8 @@ const Router = (): ReactElement => {
         <Route path="/movie/:id" element={<Movie />} />
 
         <Route path="/search" element={<Search />} />
+
+        <Route path="/mylist" element={<Favorite />} />
 
         <Route path="*" element={<Error404 />} />
       </Routes>

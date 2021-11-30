@@ -87,7 +87,7 @@ const Home = (): ReactElement => {
   return (
     <Layout>
       <Helmet>
-        <title>Netflix</title>
+        <title>Letflix</title>
         <meta name="description" content="Description" />
       </Helmet>
 

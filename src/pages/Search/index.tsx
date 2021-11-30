@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import styles from './Search.module.sass';
 
 const Search = (): ReactElement => {
+  // Always return to the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -11,7 +12,7 @@ const Search = (): ReactElement => {
   return (
     <Layout>
       <Helmet>
-        <title>Netflix | Search</title>
+        <title>Letflix | Search</title>
         <meta name="description" content="Description" />
       </Helmet>
       <div className={styles.container}>
