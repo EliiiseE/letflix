@@ -21,6 +21,7 @@ type SimilarMovieType = {
 };
 
 const Movie = (): ReactElement => {
+  // Always return to the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -37,6 +38,7 @@ const Movie = (): ReactElement => {
         return navigate('/404');
       }
 
+      // Get the details for the description
       setMovie({
         image: response.poster_path,
         name: response.title,
@@ -63,6 +65,7 @@ const Movie = (): ReactElement => {
   return (
     <Layout>
       <Helmet>
+        {/* Allows to dynamically add the right movie title */}
         <title>{`Netflix | ${movie?.name}`}</title>
         <meta name="description" content={movie?.description} />
       </Helmet>

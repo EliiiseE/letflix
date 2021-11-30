@@ -26,6 +26,7 @@ type GenreMovieType = {
 };
 
 const Home = (): ReactElement => {
+  // Always return to the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -36,6 +37,7 @@ const Home = (): ReactElement => {
 
   // useEffect with [] to use it only once at the beginning
   useEffect(() => {
+    // Allows to get the img and id of each top rated movies
     getTopRatedMovies().then((response) => {
       response.results.map((movie) => {
         setTopRatedMovies((movies) =>
@@ -47,13 +49,14 @@ const Home = (): ReactElement => {
       });
     });
 
+    // Allows to get all genres of movies
     getAllGenres().then((response) => {
       const { genres } = response;
-
       genres.map((genre) => {
         const { id, name } = genre;
         getMoviesFromGenre(id).then((res) => {
           const finalMovies: MovieType[] = [];
+          // Allows to get the img and id of each diff movie genres
           res.results.map((movie) => {
             finalMovies.push({
               image: movie.poster_path,
@@ -70,17 +73,7 @@ const Home = (): ReactElement => {
       });
     });
 
-    // getMoviesFromGenre(35).then((response) => {
-    //   response.results.map((movie) => {
-    //     setComedieMovies((movies) =>
-    //       movies.concat({
-    //         image: movie.poster_path,
-    //         id: movie.id,
-    //       }),
-    //     );
-    //   });
-    // });
-
+    // Allows to get the first popular movie
     getPopularMovies().then((response) => {
       const movie = response.results[0];
       setPopularMovie({
@@ -106,6 +99,7 @@ const Home = (): ReactElement => {
         {popularMovie && (
           <>
             <div>
+              {/* Url required for getting the img */}
               <img
                 src={`https://image.tmdb.org/t/p/original${popularMovie.image}`}
                 className={styles.witcherImg}
@@ -120,6 +114,7 @@ const Home = (): ReactElement => {
                 <ButtonPlay />
               </li>
               <li className={styles.ContaintNav}>
+                {/* Allows to change the url w/ the correct ID movie */}
                 <Link to={`/movie/${popularMovie.id}`}>
                   <TextIcon titleName="Informations" icon="akar-icons:info" />
                 </Link>

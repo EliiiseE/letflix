@@ -12,6 +12,7 @@ const buttonPlay = (props: PropsType): ReactElement => {
   return (
     <div>
       <Video />
+      {/* Add 2 diff button styles */}
       <button className={`${styles.buttonPlay} ${large ? styles.buttonPlayLarge : ''}`}>
         <Icon icon="ci:play-arrow" className={styles.iconOnButton} />
         <span className={styles.txtButton}> Play </span>
