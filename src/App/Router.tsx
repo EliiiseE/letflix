@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from 'pages/Home';
 import Movie from 'pages/Movie';
 import Error404 from 'pages/Error404';
-import Search from 'components/Search';
+import Search from 'pages/Search';
 
 const Router = (): ReactElement => {
   return (

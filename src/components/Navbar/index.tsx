@@ -19,7 +19,7 @@ const Navbar = (): ReactElement => {
         </li>
 
         <li className={styles.link}>
-          <Link to={`/Search/`}>
+          <Link to={`search`}>
             <TextIcon titleName="Rechercher" icon="akar-icons:search" />
           </Link>
         </li>

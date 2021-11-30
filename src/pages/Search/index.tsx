@@ -14,9 +14,10 @@ const Search = (): ReactElement => {
         <title>Netflix | Search</title>
         <meta name="description" content="Description" />
       </Helmet>
-
       <div className={styles.container}>
-        <p>Search page !</p>
+        <h1>salut</h1>
+        <input className={styles.inputName} type="text" placeholder="film"></input>
+        {/* <button>Ok</button> */}
       </div>
     </Layout>
   );
