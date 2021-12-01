@@ -104,7 +104,7 @@ const Home = (): ReactElement => {
           <div className={styles.categoryMenu}>
             {genreMovies.map((genre, index) => (
               <a
-                href={`/home#${index.toString()}`}
+                href={`/home#${index}`}
                 onClick={() => setMenuIsOpen(false)}
                 className={styles.ancre}
                 key={index}

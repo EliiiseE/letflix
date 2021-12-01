@@ -72,3 +72,13 @@ export const getPopularMovies = async (): Promise<AllMoviesType> => {
 
   return responseJson;
 };
+
+// Function for getting search movie
+export const getSearchedMovies = async (txt: string): Promise<AllMoviesType> => {
+  const url = `${API_URL}/search/movie?api_key=${API_KEY}&language=fr-FR&query=${txt}`;
+
+  const response = await fetch(url);
+  const responseJson = await response.json();
+
+  return responseJson;
+};

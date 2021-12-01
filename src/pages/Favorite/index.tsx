@@ -10,6 +10,8 @@ const Favorite = (): ReactElement => {
     window.scrollTo(0, 0);
   }, []);
 
+  // TODO: Talk to Manu / Luc / Charline / Alexis to ask how to add favorite in React --> Contexte ? But how ?
+
   return (
     <Layout>
       <Helmet>
