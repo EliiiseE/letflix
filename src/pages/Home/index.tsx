@@ -8,6 +8,8 @@ import { ReactElement, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { getTopRatedMovies, getMoviesFromGenre, getAllGenres, getPopularMovies } from 'api/tmdb';
 import { Link } from 'react-router-dom';
+import { Icon } from '@iconify/react';
+// import { Loader } from 'components/Loader';
 
 type MovieType = {
   image: string;
@@ -30,11 +32,34 @@ const Home = (): ReactElement => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  const [toggle, setToggle] = useState<boolean>(false);
   const [topRatedMovies, setTopRatedMovies] = useState<Array<MovieType>>([]);
   const [popularMovie, setPopularMovie] = useState<PopularMovieType>();
   const [genreMovies, setGenreMovies] = useState<Array<GenreMovieType>>([]);
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
+
+  const changeToggle = () => {
+    setToggle(!toggle);
+    console.log(toggle);
+    setMenuIsOpen(true);
+    return toggle;
+  };
+
+  const closeCategoryMenu = () => {
+    setToggle(!toggle);
+    setMenuIsOpen(false);
+    console.log(toggle);
+    return toggle;
+  };
+
+  // Use Effect for overscolling hidden body
+
+  //   useEffect(() => {
+  //     toggle && document.body.style.overflow = 'hidden';
+  //     !toggle && document.body.style.overflow = 'unset';
+  //  }, [toggle ]);
+
+  // toggle && document.body.style.overflow;
 
   // useEffect with [] to use it only once at the beginning
   useEffect(() => {
@@ -95,13 +120,25 @@ const Home = (): ReactElement => {
       <div className={styles.container}>
         <div className={styles.logoandCateg}>
           <img src="images/logo-mobile.png"></img>
-          <p style={{ marginLeft: 30 }} onClick={() => setMenuIsOpen(true)}>
+          {/* <Loader /> */}
+          <p style={{ marginLeft: 30 }} onClick={changeToggle}>
             Catégorie
+            <Icon
+              icon="bx:bxs-down-arrow"
+              style={{ width: 10, marginLeft: 10, alignItems: 'center' }}
+            />
           </p>
         </div>
         {/* To show the menu only if menuIsOpen === true */}
         {menuIsOpen && (
           <div className={styles.categoryMenu}>
+            <div style={{ width: 100 + `%` }}>
+              <Icon
+                icon="akar-icons:cross"
+                style={{ margin: 10, transform: 'scale(1.5)' }}
+                onClick={closeCategoryMenu}
+              />
+            </div>
             {genreMovies.map((genre, index) => (
               <a
                 href={`/home#${index.toString()}`}
