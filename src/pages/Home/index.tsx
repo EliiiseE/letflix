@@ -34,6 +34,7 @@ const Home = (): ReactElement => {
   const [topRatedMovies, setTopRatedMovies] = useState<Array<MovieType>>([]);
   const [popularMovie, setPopularMovie] = useState<PopularMovieType>();
   const [genreMovies, setGenreMovies] = useState<Array<GenreMovieType>>([]);
+  const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
 
   // useEffect with [] to use it only once at the beginning
   useEffect(() => {
@@ -94,8 +95,25 @@ const Home = (): ReactElement => {
       <div className={styles.container}>
         <div className={styles.logoandCateg}>
           <img src="images/logo-mobile.png"></img>
-          <a style={{ marginLeft: 30 }}>Catégorie</a>
+          <p style={{ marginLeft: 30 }} onClick={() => setMenuIsOpen(true)}>
+            Catégorie
+          </p>
         </div>
+        {/* To show the menu only if menuIsOpen === true */}
+        {menuIsOpen && (
+          <div className={styles.categoryMenu}>
+            {genreMovies.map((genre, index) => (
+              <a
+                href={`/home#${index.toString()}`}
+                onClick={() => setMenuIsOpen(false)}
+                className={styles.ancre}
+                key={index}
+              >
+                {genre.title}
+              </a>
+            ))}
+          </div>
+        )}
         {popularMovie && (
           <>
             <div>
@@ -125,7 +143,9 @@ const Home = (): ReactElement => {
 
         <MovieList movies={topRatedMovies} title="Les mieux notés" />
         {genreMovies.map((genre, index) => (
-          <MovieList movies={genre.movies} title={genre.title} key={index} />
+          <div id={index.toString()} key={index}>
+            <MovieList movies={genre.movies} title={genre.title} />
+          </div>
         ))}
         <Navbar />
       </div>
