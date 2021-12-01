@@ -21,10 +21,10 @@ const Log = (): ReactElement => {
         <div className={styles.form}>
           <input type="email" placeholder="E-mail ou téléphone" />
           <input type="password" placeholder="Mot de passe" />
-          <Link className={styles.button} to="/">
+          <Link className={styles.button} to="/home">
             Entrer
           </Link>
-          <Link className={styles.sign} to="/">
+          <Link className={styles.sign} to="/home">
             Se connecter anonymement
           </Link>
         </div>

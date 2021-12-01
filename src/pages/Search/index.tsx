@@ -2,6 +2,8 @@ import Layout from 'components/Layout';
 import { ReactElement, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import styles from './Search.module.sass';
+import { Icon } from '@iconify/react';
+import Navbar from 'components/Navbar';
 
 const Search = (): ReactElement => {
   // Always return to the top of the page
@@ -17,7 +19,15 @@ const Search = (): ReactElement => {
       </Helmet>
 
       <div className={styles.container}>
-        <p>Search page !</p>
+        <input
+          className={styles.inputName}
+          type="text"
+          placeholder="Quel Film ?"
+          src="public/flavicon1.ico"
+        ></input>
+        <Icon className={styles.search} icon="akar-icons:search" />
+
+        <Navbar />
       </div>
     </Layout>
   );

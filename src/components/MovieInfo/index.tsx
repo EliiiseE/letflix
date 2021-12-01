@@ -26,7 +26,7 @@ const MovieInfo = (props: PropsType): ReactElement => {
 
   return (
     <div className={styles.container}>
-      <Link to="/" className={styles.return}>
+      <Link to="/home" className={styles.return}>
         <Icon icon="akar-icons:chevron-left" />
       </Link>
       <div className={styles.all_information}>

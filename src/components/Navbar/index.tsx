@@ -1,26 +1,37 @@
 import styles from './Navbar.module.sass';
 import TextIcon from '../TextIcon';
 import { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = (): ReactElement => {
+  const { pathname } = useLocation();
+
   return (
     <div className={styles.container}>
       <ul className={styles.menu}>
         <li className={styles.link}>
-          <Link to={`/`}>
-            <TextIcon titleName="Accueil" icon="ant-design:home-filled" />
+          <Link to={`/home`}>
+            <TextIcon
+              titleName="Accueil"
+              icon={pathname === '/home' ? 'ant-design:home-filled' : 'ant-design:home-outlined'}
+            />
           </Link>
         </li>
         <li className={styles.link}>
           <Link to={`/mylist`}>
-            <TextIcon titleName="Ma liste" icon="icon-park-outline:like" />
+            <TextIcon
+              titleName="Ma liste"
+              icon={pathname === '/mylist' ? 'ci:heart-fill' : 'ci:heart-outline'}
+            />
           </Link>
         </li>
 
         <li className={styles.link}>
-          <Link to={`/Search`}>
-            <TextIcon titleName="Rechercher" icon="akar-icons:search" />
+          <Link to={`/search`}>
+            <TextIcon
+              titleName="Rechercher"
+              icon={pathname === '/search' ? 'bx:bxs-search' : 'akar-icons:search'}
+            />
           </Link>
         </li>
       </ul>

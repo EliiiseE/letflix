@@ -25,7 +25,7 @@ const Error404 = (): ReactElement => {
             Désolé, nous n'avons pas trouvé cette page. Un vaste choix de programmes vous attend sur
             la page d'accueil.
           </p>
-          <Link to="/" className={styles.button}>
+          <Link to="/home" className={styles.button}>
             Accueil
           </Link>
         </div>
