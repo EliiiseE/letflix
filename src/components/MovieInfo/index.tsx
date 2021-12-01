@@ -38,6 +38,14 @@ const MovieInfo = (props: PropsType): ReactElement => {
             <p>{year}</p>
             {/* Allows to remove the 0 if the duration is lower than 60mn */}
             <p>{`${runtimeHours > 0 ? runtimeHours + 'h' : ''} ${runtimeMinutes}min`}</p>
+
+            {/* TODO: Add onclick button -> change icon if clicked or not */}
+            <button type="button">
+              <div className={styles.iconTxt}>
+                <Icon icon="icon-park-outline:like"></Icon>
+                <p>Ajouter</p>
+              </div>
+            </button>
           </div>
         </div>
         <ButtonPlay large />
