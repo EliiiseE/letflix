@@ -42,9 +42,6 @@ const Search = (): ReactElement => {
     });
   }, [searchValue]);
 
-  // TODO: Do the input value with a useState and onChange function on Input to search in the API every time a letter change
-  // TODO: UseEffect to search everytime searchValue change
-
   return (
     <Layout>
       <Helmet>
@@ -57,7 +54,7 @@ const Search = (): ReactElement => {
           <input
             className={styles.inputName}
             type="text"
-            placeholder="Quel Film ?"
+            placeholder="Rechercher un film"
             value={searchValue}
             onChange={handleValueChange}
           ></input>
