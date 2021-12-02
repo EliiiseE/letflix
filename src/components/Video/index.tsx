@@ -1,8 +1,26 @@
 import { ReactElement } from 'react';
 import styles from './Video.module.sass';
 
-const Video = (): ReactElement => {
-  return <div className={styles.container}></div>;
+type PropsType = {
+  isPlaying: boolean;
+  disableVideo: () => void;
+  url: string;
+};
+
+const Video = (props: PropsType): ReactElement => {
+  const { isPlaying, disableVideo, url } = props;
+
+  return (
+    <>
+      {isPlaying && (
+        <div className={styles.container}>
+          <video onEnded={disableVideo} controls autoPlay>
+            <source src={url} type="video/mp4" />
+          </video>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default Video;

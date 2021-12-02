@@ -9,7 +9,7 @@ import { Helmet } from 'react-helmet-async';
 import { getTopRatedMovies, getMoviesFromGenre, getAllGenres, getPopularMovies } from 'api/tmdb';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-// import { Loader } from 'components/Loader';
+import Video from 'components/Video';
 
 type MovieType = {
   image: string;
@@ -32,34 +32,32 @@ const Home = (): ReactElement => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const [toggle, setToggle] = useState<boolean>(false);
+
   const [topRatedMovies, setTopRatedMovies] = useState<Array<MovieType>>([]);
   const [popularMovie, setPopularMovie] = useState<PopularMovieType>();
   const [genreMovies, setGenreMovies] = useState<Array<GenreMovieType>>([]);
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
+  const [videoIsPlaying, setVideoIsPlaying] = useState<boolean>(false);
+  const [urlVideo, setUrlVideo] = useState<string>('');
 
-  const changeToggle = () => {
-    setToggle(!toggle);
-    console.log(toggle);
-    setMenuIsOpen(true);
-    return toggle;
+  const handleClick = () => {
+    setMenuIsOpen(!menuIsOpen);
   };
 
-  const closeCategoryMenu = () => {
-    setToggle(!toggle);
-    setMenuIsOpen(false);
-    console.log(toggle);
-    return toggle;
+  useEffect(() => {
+    if (menuIsOpen || videoIsPlaying) {
+      document.body.style.height = '100vh';
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.height = 'auto';
+      document.body.style.overflow = 'auto';
+    }
+  }, [menuIsOpen, videoIsPlaying]);
+
+  const handlePlayVideo = (url: string) => {
+    setUrlVideo(url);
+    setVideoIsPlaying(true);
   };
-
-  // Use Effect for overscolling hidden body
-
-  //   useEffect(() => {
-  //     toggle && document.body.style.overflow = 'hidden';
-  //     !toggle && document.body.style.overflow = 'unset';
-  //  }, [toggle ]);
-
-  // toggle && document.body.style.overflow;
 
   // useEffect with [] to use it only once at the beginning
   useEffect(() => {
@@ -116,36 +114,26 @@ const Home = (): ReactElement => {
         <title>Letflix</title>
         <meta name="description" content="Description" />
       </Helmet>
-
       <div className={styles.container}>
+        <Video
+          isPlaying={videoIsPlaying}
+          disableVideo={() => setVideoIsPlaying(false)}
+          url={urlVideo}
+        />
         <div className={styles.logoandCateg}>
           <img src="images/logo-mobile.png"></img>
           {/* <Loader /> */}
-          <p style={{ marginLeft: 30 }} onClick={changeToggle}>
+          <p className={styles.categoryTitle} onClick={handleClick}>
             Catégorie
-            <Icon
-              icon="bx:bxs-down-arrow"
-              style={{ width: 10, marginLeft: 10, alignItems: 'center' }}
-            />
+            <Icon icon="bx:bxs-down-arrow" className={styles.icon} />
           </p>
         </div>
         {/* To show the menu only if menuIsOpen === true */}
         {menuIsOpen && (
-          <div className={styles.categoryMenu}>
-            <div style={{ width: 100 + `%` }}>
-              <Icon
-                icon="akar-icons:cross"
-                style={{ margin: 10, transform: 'scale(1.5)' }}
-                onClick={closeCategoryMenu}
-              />
-            </div>
+          <div className={styles.categoryMenu} onClick={handleClick}>
+            <Icon icon="akar-icons:cross" className={styles.cross} />
             {genreMovies.map((genre, index) => (
-              <a
-                href={`/home#${index}`}
-                onClick={() => setMenuIsOpen(false)}
-                className={styles.ancre}
-                key={index}
-              >
+              <a href={`/home#${index}`} onClick={handleClick} className={styles.ancre} key={index}>
                 {genre.title}
               </a>
             ))}
@@ -166,7 +154,10 @@ const Home = (): ReactElement => {
                 <TextIcon titleName="Ajouter" icon="icon-park-outline:like" />
               </li>
               <li>
-                <ButtonPlay />
+                {/* popularMovie.urlVideo */}
+                <div onClick={() => handlePlayVideo('videos/playMovie.mp4')}>
+                  <ButtonPlay />
+                </div>
               </li>
               <li className={styles.ContaintNav}>
                 {/* Allows to change the url w/ the correct ID movie */}

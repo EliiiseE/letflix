@@ -57,6 +57,7 @@ const Search = (): ReactElement => {
             placeholder="Rechercher un film"
             value={searchValue}
             onChange={handleValueChange}
+            autoFocus
           ></input>
           <button className={styles.search}>
             <Icon icon="akar-icons:search" />
@@ -64,13 +65,17 @@ const Search = (): ReactElement => {
         </div>
         <div className={styles.image}>
           {searchedMovies.map((movie, index) => (
-            <Link to={`/movie/${movie.id}`} key={index} className={styles.link}>
-              {/* Url required for getting the img */}
-              <img
-                src={`https://image.tmdb.org/t/p/original${movie.image}`}
-                className={styles.image}
-              />
-            </Link>
+            <div key={index}>
+              {movie.image && (
+                <Link to={`/movie/${movie.id}`} className={styles.link}>
+                  {/* Url required for getting the img */}
+                  <img
+                    src={`https://image.tmdb.org/t/p/original${movie.image}`}
+                    className={styles.image}
+                  />
+                </Link>
+              )}
+            </div>
           ))}
         </div>
         <Navbar />
