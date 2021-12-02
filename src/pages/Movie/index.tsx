@@ -6,6 +6,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { getMovie, getSimilarMovies } from 'api/tmdb';
 import { useParams, useNavigate } from 'react-router-dom';
+import Video from 'components/Video';
 
 type MovieType = {
   image: string;
@@ -30,6 +31,23 @@ const Movie = (): ReactElement => {
   const { id } = useParams();
   const [movie, setMovie] = useState<MovieType>();
   const [similarMovies, setSimilarMovies] = useState<Array<SimilarMovieType>>([]);
+  const [videoIsPlaying, setVideoIsPlaying] = useState<boolean>(false);
+  const [urlVideo, setUrlVideo] = useState<string>('');
+
+  useEffect(() => {
+    if (videoIsPlaying) {
+      document.body.style.height = '100vh';
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.height = 'auto';
+      document.body.style.overflow = 'auto';
+    }
+  }, [videoIsPlaying]);
+
+  const handlePlayVideo = (url: string) => {
+    setUrlVideo(url);
+    setVideoIsPlaying(true);
+  };
 
   useEffect(() => {
     getMovie(id).then((response) => {
@@ -71,6 +89,11 @@ const Movie = (): ReactElement => {
       </Helmet>
 
       <div className={styles.container}>
+        <Video
+          isPlaying={videoIsPlaying}
+          disableVideo={() => setVideoIsPlaying(false)}
+          url={urlVideo}
+        />
         {movie && (
           <MovieInfo
             image={movie.image}
@@ -78,6 +101,8 @@ const Movie = (): ReactElement => {
             date={movie.date}
             runtime={movie.runtime}
             description={movie.description}
+            // movie.urlVideo
+            playVideo={() => handlePlayVideo('../videos/playMovie.mp4')}
           />
         )}
 

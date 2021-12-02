@@ -2,7 +2,7 @@
 const API_KEY = process.env.REACT_APP_API_KEY;
 const API_URL = 'https://api.themoviedb.org/3';
 
-type AllMoviesType = {
+export type AllMoviesType = {
   page: number;
   results: MovieItemsTMDB[];
   total_pages: number;

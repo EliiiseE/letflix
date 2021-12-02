@@ -11,11 +11,12 @@ type PropsType = {
   date: string;
   runtime: number;
   description: string;
+  playVideo: () => void;
 };
 
 const MovieInfo = (props: PropsType): ReactElement => {
   /* Retrieve the object's attribut */
-  const { image, name, date, runtime, description } = props;
+  const { image, name, date, runtime, description, playVideo } = props;
 
   //Retrieve hours
   const runtimeHours = Math.floor(runtime / 60);
@@ -48,7 +49,9 @@ const MovieInfo = (props: PropsType): ReactElement => {
             </button>
           </div>
         </div>
-        <ButtonPlay large />
+        <div onClick={playVideo}>
+          <ButtonPlay large />
+        </div>
         <div className={styles.description}>
           <p>{description}</p>
         </div>
