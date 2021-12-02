@@ -9,7 +9,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import Video from 'components/Video';
-import useHomeData from './useHomeData';
+import useData from '../../hooks/useData';
 import DataContext from 'context/DataContext';
 
 const Home = (): ReactElement => {
@@ -21,7 +21,7 @@ const Home = (): ReactElement => {
     window.scrollTo(0, 0);
   }, []);
 
-  const { topRatedMovies, popularMovie, genreMovies } = useHomeData();
+  const { topRatedMovies, popularMovie, genreMovies } = useData();
 
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
   const [videoIsPlaying, setVideoIsPlaying] = useState<boolean>(false);
@@ -106,7 +106,6 @@ const Home = (): ReactElement => {
             </ul>
           </>
         )}
-
         <MovieList movies={topRatedMovies} title="Les mieux notés" />
         {genreMovies.map((genre, index) => (
           <div id={index.toString()} key={index}>
