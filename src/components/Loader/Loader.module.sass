@@ -1,15 +1,6 @@
 
-
-
-@keyframes tracking_in_contract
-    0%
-        transform: scale(0.9, 0.9)
-
-    100%
-        transform: scale(1.1, 1.1)
-
 .tracking_in_contract
-    animation: tracking_in_contract 3s cubic-bezier(0.215, 0.61, 0.355, 1) both
+    animation: tracking_in_contract 2.2s cubic-bezier(0.215, 0.61, 0.355, 1) both
     background-color: black
     color: #e82c2a
     width: 100%
@@ -26,4 +17,21 @@
     z-index: 999
    
 .transition_end
-    opacity: 0
+    display: none
+
+@keyframes tracking_in_contract
+    0%
+        transform: scale(0.9, 0.9)
+
+    100%
+        transform: scale(1.1, 1.1)
+
+@keyframes tracking_in_contract_fading_out
+    0%
+        opacity: 1
+
+    99%
+        opacity: 0
+    100%
+        display: none
+        opacity: 0
