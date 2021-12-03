@@ -11,6 +11,7 @@ import { Icon } from '@iconify/react';
 import Video from 'components/Video';
 import useHomeData from './useHomeData';
 import DataContext from 'context/DataContext';
+import Loader from 'components/Loader/index';
 
 const Home = (): ReactElement => {
   const { movies } = useContext(DataContext);
@@ -52,6 +53,7 @@ const Home = (): ReactElement => {
         <title>Letflix</title>
         <meta name="description" content="Description" />
       </Helmet>
+      <Loader />
       <div className={styles.container}>
         <Video
           isPlaying={videoIsPlaying}
