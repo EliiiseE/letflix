@@ -5,7 +5,9 @@
       "api/*": ["./api/*"],
       "components/*": ["./components/*"],
       "context/*": ["./context/*"],
+      "hooks/*" : ["./hooks/*"],
       "pages/*": ["./pages/*"],
+      "providers/*": ["./providers/*"],
       "styles/*": ["./styles/*"],
       "types/*": ["./types/*"]
     }

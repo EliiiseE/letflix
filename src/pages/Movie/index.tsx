@@ -5,8 +5,7 @@ import Layout from 'components/Layout';
 import { ReactElement, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Video from 'components/Video';
-import useData from '../../hooks/useData';
-// import DataContext from 'context/DataContext';
+import useData from 'hooks/useData';
 
 const Movie = (): ReactElement => {
   // Always return to the top of the page
@@ -55,6 +54,7 @@ const Movie = (): ReactElement => {
             date={movie.date}
             runtime={movie.runtime}
             description={movie.description}
+            id={movie.id}
             // movie.urlVideo
             playVideo={() => handlePlayVideo('../videos/playMovie.mp4')}
           />

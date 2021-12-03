@@ -1,7 +1,11 @@
 @import 'styles/variables'
 
+::-webkit-scrollbar
+  display: none
+
 .container
   margin-bottom: 70px
+  width: 100%
 
   h3
     font-size: 1.8rem
@@ -10,8 +14,11 @@
     font-weight: 300
 
   .movieList__image
+
+    overflow: auto
+
     display: flex
-    overflow-y: scroll
+
     .link
       display: block
       &:first-child

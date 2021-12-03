@@ -32,6 +32,7 @@ type DetailsMovieType = {
   date: string;
   runtime: number;
   description: string;
+  id: number;
 };
 
 type SimilarMovieType = {
@@ -120,6 +121,7 @@ const useData = (): UseHomeDataReturnType => {
           date: response.release_date,
           runtime: response.runtime,
           description: response.overview,
+          id: response.id,
         });
         // Return to empty array every time because react doesn't reload fully the page
         setSimilarMovies([]);
@@ -135,7 +137,7 @@ const useData = (): UseHomeDataReturnType => {
         });
       });
     }
-  }, [id]);
+  }, [id, navigate]);
 
   return {
     topRatedMovies,

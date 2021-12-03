@@ -44,7 +44,7 @@ export const getMoviesFromGenre = async (id: number): Promise<AllMoviesType> => 
 };
 
 // Function for getting movie details
-export const getMovie = async (id?: string): Promise<MovieTMDB> => {
+export const getMovie = async (id: string): Promise<MovieTMDB> => {
   const url = `${API_URL}/movie/${id}?api_key=${API_KEY}&language=fr-FR`;
 
   const response = await fetch(url);
@@ -54,7 +54,7 @@ export const getMovie = async (id?: string): Promise<MovieTMDB> => {
 };
 
 // Function for getting similar movies
-export const getSimilarMovies = async (id?: string): Promise<AllMoviesType> => {
+export const getSimilarMovies = async (id: string): Promise<AllMoviesType> => {
   const url = `${API_URL}/movie/${id}/similar?api_key=${API_KEY}&language=fr-FR`;
 
   const response = await fetch(url);
@@ -74,8 +74,8 @@ export const getPopularMovies = async (): Promise<AllMoviesType> => {
 };
 
 // Function for getting search movie
-export const getSearchedMovies = async (txt: string): Promise<AllMoviesType> => {
-  const url = `${API_URL}/search/movie?api_key=${API_KEY}&language=fr-FR&query=${txt}`;
+export const getSearchedMovies = async (query: string): Promise<AllMoviesType> => {
+  const url = `${API_URL}/search/movie?api_key=${API_KEY}&language=fr-FR&query=${query}`;
 
   const response = await fetch(url);
   const responseJson = await response.json();
