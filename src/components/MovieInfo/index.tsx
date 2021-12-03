@@ -1,9 +1,9 @@
 import styles from './MovieInfo.module.sass';
 import Navbar from 'components/Navbar';
 import ButtonPlay from 'components/ButtonPlay';
-import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { ReactElement, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DataContext from 'context/DataContext';
 
 type PropsType = {
@@ -17,6 +17,7 @@ type PropsType = {
 };
 
 const MovieInfo = (props: PropsType): ReactElement => {
+  const navigate = useNavigate();
   /* Retrieve the object's attribut */
   const { image, name, date, runtime, description, playVideo, id } = props;
   const { favoriteMovies, setFavoriteMovies } = useContext(DataContext);
@@ -30,6 +31,7 @@ const MovieInfo = (props: PropsType): ReactElement => {
   const year = new Date(date).getFullYear();
 
   useEffect(() => {
+    // Add favorite movie as a favmovie
     const favoriteMovie = favoriteMovies.filter((f) => f.id === id);
     if (favoriteMovie.length > 0) {
       setIsFavorite(true);
@@ -54,9 +56,9 @@ const MovieInfo = (props: PropsType): ReactElement => {
 
   return (
     <div className={styles.container}>
-      <Link to="/home" className={styles.return}>
+      <div onClick={() => navigate(-1)} className={styles.return}>
         <Icon icon="akar-icons:chevron-left" />
-      </Link>
+      </div>
       <div className={styles.all_information}>
         <div className={styles.information_top}>
           {/* Url required for getting the img */}
