@@ -9,27 +9,50 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import Video from 'components/Video';
-import useHomeData from './useHomeData';
+import useData from 'hooks/useData';
 import DataContext from 'context/DataContext';
 import Loader from 'components/Loader/index';
 
 const Home = (): ReactElement => {
-  const { movies } = useContext(DataContext);
-  console.log(movies);
-
   // Always return to the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const { topRatedMovies, popularMovie, genreMovies } = useHomeData();
+  const { topRatedMovies, popularMovie, genreMovies } = useData();
+  const { favoriteMovies, setFavoriteMovies } = useContext(DataContext);
 
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
   const [videoIsPlaying, setVideoIsPlaying] = useState<boolean>(false);
   const [urlVideo, setUrlVideo] = useState<string>('');
 
   const handleClick = () => {
     setMenuIsOpen(!menuIsOpen);
+  };
+
+  useEffect(() => {
+    const favoriteMovie = favoriteMovies.filter((f) => f.id === popularMovie?.id);
+    if (favoriteMovie.length > 0) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }, [favoriteMovies, popularMovie]);
+
+  const handleFavoriteClick = (isFav: boolean) => {
+    if (!isFav) {
+      // TODO: Change this type
+      setFavoriteMovies((movies: unknown[]) =>
+        movies.concat({
+          image: popularMovie?.image,
+          id: popularMovie?.id,
+        }),
+      );
+    } else {
+      // To let only every favorite except this one
+      setFavoriteMovies(favoriteMovies.filter((f) => f.id !== popularMovie?.id));
+    }
   };
 
   useEffect(() => {
@@ -90,8 +113,11 @@ const Home = (): ReactElement => {
               <p className={styles.movieTxt}>{popularMovie.name}</p>
             </div>
             <ul className={styles.threeElement}>
-              <li className={styles.ContaintNav}>
-                <TextIcon titleName="Ajouter" icon="icon-park-outline:like" />
+              <li className={styles.ContaintNav} onClick={() => handleFavoriteClick(isFavorite)}>
+                <TextIcon
+                  titleName="Ajouter"
+                  icon={isFavorite ? 'ci:heart-fill' : 'ci:heart-outline'}
+                />
               </li>
               <li>
                 {/* popularMovie.urlVideo */}

@@ -4,22 +4,8 @@ import MovieList from 'components/MovieList';
 import Layout from 'components/Layout';
 import { ReactElement, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { getMovie, getSimilarMovies } from 'api/tmdb';
-import { useParams, useNavigate } from 'react-router-dom';
 import Video from 'components/Video';
-
-type MovieType = {
-  image: string;
-  name: string;
-  date: string;
-  runtime: number;
-  description: string;
-};
-
-type SimilarMovieType = {
-  image: string;
-  id: number;
-};
+import useData from 'hooks/useData';
 
 const Movie = (): ReactElement => {
   // Always return to the top of the page
@@ -27,10 +13,8 @@ const Movie = (): ReactElement => {
     window.scrollTo(0, 0);
   }, []);
 
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const [movie, setMovie] = useState<MovieType>();
-  const [similarMovies, setSimilarMovies] = useState<Array<SimilarMovieType>>([]);
+  const { similarMovies, movie } = useData();
+
   const [videoIsPlaying, setVideoIsPlaying] = useState<boolean>(false);
   const [urlVideo, setUrlVideo] = useState<string>('');
 
@@ -48,37 +32,6 @@ const Movie = (): ReactElement => {
     setUrlVideo(url);
     setVideoIsPlaying(true);
   };
-
-  useEffect(() => {
-    getMovie(id).then((response) => {
-      // Go to 404 page if there is no movie
-      if (response?.success === false) {
-        return navigate('/404');
-      }
-
-      // Get the details for the description
-      setMovie({
-        image: response.poster_path,
-        name: response.title,
-        date: response.release_date,
-        runtime: response.runtime,
-        description: response.overview,
-      });
-    });
-
-    // Return to empty array every time because react doesn't reload fully the page
-    setSimilarMovies([]);
-    getSimilarMovies(id).then((response) => {
-      response.results.map((similarMovie) => {
-        setSimilarMovies((movies) =>
-          movies.concat({
-            image: similarMovie.poster_path,
-            id: similarMovie.id,
-          }),
-        );
-      });
-    });
-  }, [id, navigate]);
 
   return (
     <Layout>
@@ -101,6 +54,7 @@ const Movie = (): ReactElement => {
             date={movie.date}
             runtime={movie.runtime}
             description={movie.description}
+            id={movie.id}
             // movie.urlVideo
             playVideo={() => handlePlayVideo('../videos/playMovie.mp4')}
           />

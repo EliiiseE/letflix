@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import DataContext from 'context/DataContext';
+import DataContext, { DataContextType } from 'context/DataContext';
+import React, { useState } from 'react';
 
 const DataProvider: React.FC = ({ children }) => {
-  const contextValue = {
-    movies: [],
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+
+  const contextValue: DataContextType = {
+    favoriteMovies: favoriteMovies,
+    setFavoriteMovies: setFavoriteMovies,
   };
 
   return <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>;
